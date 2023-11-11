@@ -38,12 +38,12 @@
     font-style: italic;
   }
 
-  @font-face {
+  /* @font-face {
     font-family: "Lato";
     src: url("/fonts/Lato/Lato-BoldItalic.ttf") format("ttf");
     font-weight: normal;
     font-style: italic;
-  }
+  } */
 
   @font-face {
     font-family: "Lato";
@@ -75,7 +75,8 @@
 }
 
 * {
-  font-family: "Lato", sans-serif;
+  font-family: "Lato";
+  font-weight: 100;
 }
 
 
