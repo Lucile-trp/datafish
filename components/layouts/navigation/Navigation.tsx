@@ -1,9 +1,9 @@
 import { NavigationType } from "@/types/Navigation";
 import Link from "next/link";
 
-export const Navigation = (navigation: NavigationType) => {
+export const NavigationBar = (navigation: NavigationType) => {
   return (
-    <nav className="flex flex-row gap-7 text-white">
+    <nav className="md:flex flex-row gap-7 text-white hidden">
       {Object.entries(navigation).map((item, i) => {
         return (
           <Link

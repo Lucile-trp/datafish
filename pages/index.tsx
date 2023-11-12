@@ -11,8 +11,8 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="h-screen w-screen">
-        <h1>Accueil</h1>
+      <div>
+        <h1 className="">Accueil</h1>
       </div>
     </>
   );
