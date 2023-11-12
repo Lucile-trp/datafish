@@ -72,18 +72,19 @@
     font-weight: 100;
     font-style: italic;
   }
-}
 
-* {
-  font-family: "Lato";
-  font-weight: 100;
-}
+  @layer base {
+    * {
+      font-family: "Lato";
+      font-weight: 100;
+    }
 
-
-.background-radial-gradient {
-  background: radial-gradient(
-    73.58% 178.7% at 73.58% 47.73%,
-    #032549 0%,
-    #001220 59.5%
-  );
+    main {
+      background: radial-gradient(
+        73.58% 178.7% at 73.58% 47.73%,
+        #032549 0%,
+        #001220 59.5%
+      );
+    }
+  }
 }

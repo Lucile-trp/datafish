@@ -5,7 +5,7 @@ export const Footer = () => {
   const version = "v0.0.1";
   return (
     <footer className="bottom-0 w-full h-[50px]">
-      <div className="inline-flex items-center w-full px-5 py-3 mx-auto gap-x-3 ">
+      <div className="inline-flex items-center w-full px-5 lg:px-32 py-3 mx-auto gap-x-3 ">
         <Logo className="w-[22px] h-[22px]"/>
         <p className="items-center mt-0 text-xs text-gray-300">
           © {new Date().getFullYear()} {author} — Contact

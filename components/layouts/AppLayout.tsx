@@ -4,10 +4,10 @@ import { Header } from "../ui/Header";
 
 export const AppLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <main className="flex flex-col h-screen background-radial-gradient">
+    <main className="flex flex-col h-screen w-screen">
       <Header />
       <div className="grow">{children}</div>
-      <Footer></Footer>
+      <Footer/>
     </main>
   );
 };

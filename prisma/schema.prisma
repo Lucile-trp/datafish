@@ -40,44 +40,65 @@ enum Uicn {
   NON_RENSEIGNE
 }
 
+model User {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  email     String   @unique
+  password  String
+  pseudo    String?
+  created_at DateTime @default(now())
+  role      Roles    @default(USER)
+  Fish      Fish[]
+}
+
 model Fish {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
+  // DATA INFORMATIONS
+  user       User     @relation(fields: [user_id], references: [id])
+  user_id    String   @db.ObjectId
+  created_at DateTime @default(now())
+  upadted_at DateTime @default(now())
+
   // GLOBAL INFORMATIONS
-  name           String
-  vernacularName String
-  longevity      Int?
-  picture        String?
-  UICNStatus     Uicn    @default(NON_RENSEIGNE)
-  description    String?
+  name            String
+  vernacular_name String
+  longevity       Int?
+  pictures        String[]
+  UICN_category   Uicn     @default(NON_RENSEIGNE)
+  description     String?
+
+  // Morphologie
+  width_max  Float
+  width_min  Float
+  height_max Float
+  height_min Float
+  motif      String?
+  shape      String?
 
   // CLASSIFICATION = rang taxinomique
   kingdom    String @default("N/A")
   phylum     String
   class      String
   order      String
-  infraorder String @default("N/A")
+  infraOrder String @default("N/A")
   family     String
+  sub_family String @default("N/A")
   genus      String
+  species    String
 
   // MODE DE VIE
-  sociability    String?
-  temperatureMin Int?
-  temperatureMax Int?
-  depthMax  Int?
-  depthMin  Int?
+  sociability     String?
+  temperature_min Int?
+  temperature_max Int?
+  depth_max       Int?
+  depth_min       Int?
+  diet            String?
+  venomous        Boolean?
+  // Ajouter courants + Type d'eau + Terrotorialité + Diurne/nocture/both
 
   // LOCALISATION
-  oceanLocalisation Oceans[]
+  ocean_localisation Oceans[]
+  // Ajouter Lac + Rivières 
 
   // AQUARIOPHILIE
-}
-
-model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  email     String   @unique
-  password  String
-  pseudo    String?
-  createdAt DateTime @default(now())
-  role      Roles    @default(USER)
 }
