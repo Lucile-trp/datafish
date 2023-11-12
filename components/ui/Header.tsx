@@ -12,8 +12,8 @@ const navigation: NavigationType = [
     children: [],
   },
   {
-    title: "Encylcopédie",
-    href: "/",
+    title: "Encyclopédie",
+    href: "/encyclopedie/",
     children: [],
   },
   {
