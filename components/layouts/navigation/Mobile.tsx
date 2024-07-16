@@ -36,7 +36,7 @@ export const MobileMenuNavigation = (navigation: NavigationType) => {
 const MobileMenuPanel = () => {
    return (
     <div className=" ">
-     <h1 className="absolute bg-white  top-24 opacity-10 border-1 rounded right-8 w-1/3">Menu open</h1>
+     <h1 className="absolute bg-white  top-24 opacity-10 border-1 rounded right-8 w-2/3">Menu open</h1>
     </div>
    )
 }

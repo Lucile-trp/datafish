@@ -3,88 +3,27 @@
 @tailwind utilities;
 
 @layer base {
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-Regular.ttf") format("ttf");
-    font-weight: normal;
-    font-style: normal;
-  }
 
   @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-Black.ttf") format("ttf");
-    font-weight: 900;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-BlackItalic.ttf") format("ttf");
-    font-weight: 900;
-    font-style: italic;
-  }
-
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-Bold.ttf") format("ttf");
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-BoldItalic.ttf") format("ttf");
-    font-weight: bold;
-    font-style: italic;
-  }
-
-  /* @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-BoldItalic.ttf") format("ttf");
-    font-weight: normal;
-    font-style: italic;
-  } */
-
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-Light.ttf") format("ttf");
-    font-weight: 300;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-LightItalic.ttf") format("ttf");
-    font-weight: 300;
-    font-style: italic;
-  }
-
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-Thin.ttf") format("ttf");
-    font-weight: 100;
-    font-style: normal;
-  }
-
-  @font-face {
-    font-family: "Lato";
-    src: url("/fonts/Lato/Lato-ThinItalic.ttf") format("ttf");
-    font-weight: 100;
-    font-style: italic;
+    font-family: "Faune";
+    src: url("/fonts/faune/Faune-Text_Regular.woff") format("woff");
   }
 
   @layer base {
     * {
-      font-family: "Lato";
-      font-weight: 100;
+      font-family: "Faune";
     }
 
-    main {
+    /* main {
       background: radial-gradient(
         73.58% 178.7% at 73.58% 47.73%,
         #032549 0%,
         #001220 59.5%
       );
+    } */
+
+    main {
+      background-color: #001220;
     }
   }
 }
