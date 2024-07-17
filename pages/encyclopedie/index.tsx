@@ -17,10 +17,13 @@ export default function MainPageEncyclopedie() {
   return (
     <section>
       <h1 className="text-white text-4xl">Encyclopédie</h1>
-
-      {FishData.map((fish, i) => (
-        <Card key={i} {...fish}></Card>
-      ))}
+      <div className="grid lg:grid-cols-3 gap-5 pt-3">
+        {FishData.length < 1 || FishData == undefined ? (
+          <p className="text-white italic">Chargement...</p>
+        ) : (
+          FishData.map((fish, i) => <Card key={i} {...fish}></Card>)
+        )}
+      </div>
     </section>
   );
 }
