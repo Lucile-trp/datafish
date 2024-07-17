@@ -1,9 +1,11 @@
+import { Modale } from "@/components/encyclopedia/Modale";
 import { Card } from "@/components/ui/utilities/Card";
 import { Fish } from "@prisma/client";
 import { useEffect, useState } from "react";
 
 export default function MainPageEncyclopedie() {
   const [FishData, setFishData] = useState<Fish[]>([]);
+  const [selectedFish, setSelectedFish] = useState<Fish | null>(null);
   useEffect(() => {
     getData();
   }, []);
@@ -21,9 +23,13 @@ export default function MainPageEncyclopedie() {
         {FishData.length < 1 || FishData == undefined ? (
           <p className="text-white italic">Chargement...</p>
         ) : (
-          FishData.map((fish, i) => <Card key={i} {...fish}></Card>)
+          FishData.map((fish, i) => <Card key={i} fish={fish} selectedFish={selectedFish} setSelectedFish={setSelectedFish} ></Card>)
         )}
       </div>
+
+      {
+        selectedFish ? (<Modale {...selectedFish}></Modale>) : <></>
+      }
     </section>
   );
 }
