@@ -24,6 +24,11 @@
 
     main {
       background-color: #001220;
+      color: white;
+    }
+
+    .title {
+      font-size: xx-large;
     }
 
     .divider-solid {

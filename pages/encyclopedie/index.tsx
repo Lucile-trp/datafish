@@ -18,7 +18,7 @@ export default function MainPageEncyclopedie() {
 
   return (
     <section>
-      <h1 className="text-white text-4xl">Encyclopédie</h1>
+      <h1 className="title">Encyclopédie</h1>
       <div className="grid lg:grid-cols-3 gap-5 pt-3">
         {FishData.length < 1 || FishData == undefined ? (
           <p className="text-white italic">Chargement...</p>

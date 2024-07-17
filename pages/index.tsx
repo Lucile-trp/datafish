@@ -11,9 +11,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="">
-        <h1 className="text-white text-4xl">Bienvenue sur Datafish</h1>
+        <h1 className="title">Bienvenue sur Datafish</h1>
 
-        <p className="text-white text-xl md:w-2/3 lg:w-2/4">
+        <p className=" md:w-2/3 lg:w-2/4">
           [L'ambition de ce projet est double. D'une part, il vise à éduquer et
           sensibiliser le grand public, les étudiants, les chercheurs et les
           décideurs politiques à la richesse et à la fragilité de la faune
