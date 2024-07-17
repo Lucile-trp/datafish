@@ -1,6 +1,5 @@
-import { AppLayout } from "@/components/layouts/AppLayout";
+/* eslint-disable react/no-unescaped-entities */
 import Head from "next/head";
-// import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
@@ -11,9 +10,22 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-        <h1 className="">Accueil</h1>
-      </div>
+      <section className="">
+        <h1 className="text-white text-4xl">Bienvenue sur Datafish</h1>
+
+        <p className="text-white text-xl md:w-2/3 lg:w-2/4">
+          [L'ambition de ce projet est double. D'une part, il vise à éduquer et
+          sensibiliser le grand public, les étudiants, les chercheurs et les
+          décideurs politiques à la richesse et à la fragilité de la faune
+          aquatique. D'autre part, il souhaite fournir un outil précieux aux
+          scientifiques et aux conservationnistes pour mieux comprendre et
+          protéger ces écosystèmes vitaux.En combinant rigueur scientifique et
+          technologies de pointe, nous espérons contribuer à un futur où
+          l'information sur la faune aquatique est non seulement accessible,
+          mais aussi engageante et mobilisatrice, stimulant ainsi une action
+          collective en faveur de la préservation de notre patrimoine naturel.] texte provisoire
+        </p>
+      </section>
     </>
   );
 }
