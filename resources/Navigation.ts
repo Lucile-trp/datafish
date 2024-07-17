@@ -13,7 +13,7 @@ export const navigation: NavigationType = [
     },
     {
       title: "Informations",
-      href: "/",
+      href: "/informations",
       children: [
         {
           title: "Nous contacter",
