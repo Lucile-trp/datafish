@@ -1,33 +1,9 @@
-
 import { Logo } from "./logo_white";
-import { NavigationType } from "@/types/Navigation";
 import { NavigationBar } from "../layouts/navigation/Navigation";
-import Link from "next/link";
 import { MobileMenuNavigation } from "../layouts/navigation/Mobile";
+import { navigation } from "@/resources/Navigation";
 
 
-const navigation: NavigationType = [
-  {
-    title: "Datavisualisation",
-    href: "/",
-    children: [],
-  },
-  {
-    title: "Encyclopédie",
-    href: "/encyclopedie/",
-    children: [],
-  },
-  {
-    title: "Informations",
-    href: "/",
-    children: [
-      {
-        title: "Nous contacter",
-        href: "/",
-      },
-    ],
-  },
-];
 
 export const Header = () => {
   return (
@@ -39,9 +15,9 @@ export const Header = () => {
           <h1 className="text-white font-bold text-2xl">Datafish</h1>
         </div>
         <div className="flex">
-        <NavigationBar {...navigation}></NavigationBar>
-        <MobileMenuNavigation {...navigation}></MobileMenuNavigation>
-        {/* <Link href="/" className="text-white font-bold ml-8">Se connecter</Link> */}
+          <NavigationBar {...navigation}></NavigationBar>
+          <MobileMenuNavigation {...navigation}></MobileMenuNavigation>
+          {/* <Link href="/" className="text-white font-bold ml-8">Se connecter</Link> */}
         </div>
       </div>
     </header>

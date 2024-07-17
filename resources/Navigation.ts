@@ -1,0 +1,29 @@
+import { NavigationType } from "@/types/Navigation";
+
+export const navigation: NavigationType = [
+    {
+      title: "Datavisualisation",
+      href: "/",
+      children: [],
+    },
+    {
+      title: "Encyclopédie",
+      href: "/encyclopedie/",
+      children: [],
+    },
+    {
+      title: "Informations",
+      href: "/",
+      children: [
+        {
+          title: "Nous contacter",
+          href: "/",
+        },
+      ],
+    },
+    {
+      title: "Se connecter",
+      href: "/",
+      children: [],
+    },
+  ];
