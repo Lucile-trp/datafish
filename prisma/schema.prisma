@@ -23,21 +23,36 @@ enum Oceans {
   OCEAN_AUSTRAL
 }
 
+// enum Uicn {
+//   ETEINTE_MONDIAL
+//   ETEINTE_SAUVAGE
+//   ETEINTE_REGIONAL
+//   EN_DANGER_CRITIQUE
+//   EN_DANGER
+//   VULNERABLE
+//   QUASI_MENACEE
+//   PREOCCUPATION_MINEURE
+
+//   DONNEES_INSUFISANTES
+//   NON_APPLICABLE
+//   NON_EVALUEE
+
+//   NON_RENSEIGNE
+// }
+
 enum Uicn {
-  ETEINTE_MONDIAL
-  ETEINTE_SAUVAGE
-  ETEINTE_REGIONAL
-  EN_DANGER_CRITIQUE
-  EN_DANGER
-  VULNERABLE
-  QUASI_MENACEE
-  PREOCCUPATION_MINEURE
+  EX
+  EW
+  RE
+  CR
+  EN
+  VU
+  NT
+  LC
 
-  DONNEES_INSUFISANTES
-  NON_APPLICABLE
-  NON_EVALUEE
-
-  NON_RENSEIGNE
+  DD
+  NA
+  NE
 }
 
 model User {
@@ -64,7 +79,7 @@ model Fish {
   vernacular_name String
   longevity       Int?
   pictures        String[]
-  UICN_category   Uicn     @default(NON_RENSEIGNE)
+  UICN_category   Uicn     @default(NE)
   description     String?
 
   // Morphologie

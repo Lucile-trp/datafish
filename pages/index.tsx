@@ -13,6 +13,8 @@ export default function Home() {
       <section className="">
         <h1 className="title">Bienvenue sur Datafish</h1>
 
+        <div className="divider-solid w-1/3 m-2"></div>
+
         <p className=" md:w-2/3 lg:w-2/4">
           [L'ambition de ce projet est double. D'une part, il vise à éduquer et
           sensibiliser le grand public, les étudiants, les chercheurs et les
