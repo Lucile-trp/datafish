@@ -13,7 +13,7 @@ export const Modale = (selectedFish: Fish) => {
           </p>
         </div>
 
-        <Link href="/" className="italic">
+        <Link href={"/encyclopedie/" + selectedFish.id} className="italic">
           Voir la fiche...
         </Link>
       </div>
