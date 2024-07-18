@@ -14,14 +14,14 @@ export const RegisterForm = () => {
   async function Register() {
     console.log("user", user);
    
-    if (user.email && user.password && user.pseudo) {
-      const result = await fetchAPI("/api/user/create", {
-        method: "POST",
-        body: JSON.stringify(user),
-      });
+    // if (user.email && user.password && user.pseudo) {
+    //   const result = await fetchAPI("/api/user/create", {
+    //     method: "POST",
+    //     body: JSON.stringify(user),
+    //   });
 
-      console.log(result);
-    }
+    //   console.log(result);
+    // }
 
     // If all ok, send to API
   }

@@ -1,5 +1,6 @@
 import { NavigationType } from "@/types/Navigation";
-import { MenuAlt1Icon, XIcon } from '@heroicons/react/solid';
+import { MenuAlt1Icon, XIcon } from "@heroicons/react/solid";
+import Link from "next/link";
 
 import { useState } from "react";
 
@@ -19,7 +20,6 @@ export const MobileMenuNavigation = (navigation: NavigationType) => {
           <>
             <span className="flex items-center justify-center w-10 h-10 rounded-full shrink-0 btn__colors">
               <MenuAlt1Icon className="w-8 h-8" />
-              
             </span>
           </>
         ) : (
@@ -28,15 +28,30 @@ export const MobileMenuNavigation = (navigation: NavigationType) => {
           </span>
         )}
       </button>
-      {isMenuOpen ? <MobileMenuPanel /> : null}
+      {isMenuOpen ? <MobileMenuPanel {...navigation} /> : null}
     </div>
   );
 };
 
-const MobileMenuPanel = () => {
-   return (
-    <div className=" ">
-     <h1 className="absolute bg-white  top-24 opacity-10 border-1 rounded right-8 w-2/3">Menu open</h1>
+const MobileMenuPanel = (navigation: NavigationType) => {
+  return (
+    <div className="absolute bg-white/90 top-24 border-1 left-0 rounded w-full h-fit text-black">
+      <nav className="flex flex-col mx-8 my-4">
+        {Object.entries(navigation).map((item, i) => {
+          return (
+            <div key={i} className="m-1 flex flex-col">
+              <Link
+                key={item[1].title as string}
+                href={`${item[1].href}`}
+                className="h-6 m-3"
+              >
+                {item[1].title}
+              </Link>
+              <div className="divider-solid border-t-black " />
+            </div>
+          );
+        })}
+      </nav>
     </div>
-   )
-}
+  );
+};
