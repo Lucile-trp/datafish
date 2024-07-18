@@ -26,7 +26,7 @@ export default function MainPageEncyclopedie() {
         {FishData.length < 1 || FishData == undefined ? (
           <p className="text-white italic">Chargement...</p>
         ) : (
-          FishData.map((fish, i) => <Card key={i} fish={fish} selectedFish={selectedFish} setSelectedFish={setSelectedFish} ></Card>)
+          FishData.map((fish, i) => <Card key={fish.id} fish={fish} selectedFish={selectedFish} setSelectedFish={setSelectedFish} ></Card>)
         )}
       </div>
 

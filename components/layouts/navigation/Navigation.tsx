@@ -7,7 +7,7 @@ export const NavigationBar = (navigation: NavigationType) => {
       {Object.entries(navigation).map((item, i) => {
         return (
           <Link
-            key={i}
+            key={item[1].title as string}
             href={`${item[1].href}`}
             className="h-6 hover:border-b hover:border-white "
           >
