@@ -23,7 +23,12 @@ export const navigation: NavigationType = [
     },
     {
       title: "Se connecter",
-      href: "/",
+      href: "/auth/login",
+      children: [],
+    },
+    {
+      title: "S'inscrire",
+      href: "/auth/register",
       children: [],
     },
   ];

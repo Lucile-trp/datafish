@@ -26,6 +26,12 @@
       background-color: #001220;
       color: white;
     }
+    input {
+      background-color: #001220;
+      border: 1px solid rgba(255, 255, 255, 0.20);
+      border-radius: 5px;
+      padding: 2px;
+    }
 
     .title {
       font-size: xx-large;
