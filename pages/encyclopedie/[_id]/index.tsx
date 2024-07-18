@@ -14,8 +14,9 @@ export default function FishDetailPage({ _id }: { _id: string }) {
 
   useEffect(() => {
     getData();
+    console.log(fish)
     
-  }, [])
+  }, )
 
   async function getData() {
     await fetch("/api/fish/" + id)
