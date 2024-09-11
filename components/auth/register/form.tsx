@@ -2,6 +2,8 @@
 import { fetchAPI } from "@/lib/fetchers/fetchAPI";
 import { User } from "@prisma/client";
 import { useState } from "react";
+const bcrypt = require('bcryptjs');
+
 
 export const RegisterForm = () => {
   const [user] = useState<Partial<User>>({
@@ -14,16 +16,21 @@ export const RegisterForm = () => {
   async function Register() {
     console.log("user", user);
    
-    // if (user.email && user.password && user.pseudo) {
-    //   const result = await fetchAPI("/api/user/create", {
-    //     method: "POST",
-    //     body: JSON.stringify(user),
-    //   });
+    if (user.email && user.password && user.pseudo) {
 
-    //   console.log(result);
-    // }
+      //HASH GENERATION
+      var salt = bcrypt.genSaltSync(10);
+      user.password = bcrypt.hashSync(user.password, salt);
 
-    // If all ok, send to API
+      //INSERT USER
+       await fetch("/api/user/create", {
+        method: "POST",
+        
+        body: JSON.stringify(user),
+      });
+
+      //TODO : FEEDBACK USER
+    }
   }
 
   // TODO

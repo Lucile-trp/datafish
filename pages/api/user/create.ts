@@ -1,3 +1,4 @@
+import { encryptionPassword } from "@/lib/bcypt";
 import prisma from "@/lib/prisma";
 // import { User } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
@@ -8,13 +9,16 @@ import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function user(req: NextApiRequest, res: NextApiResponse) {
   const method = req.method;
-  const user = req.body;
+  let user = req.body;
   user.role = "USER";
 
   // TODO: Vérification des informations
 
   if (method == "POST") {
     try {
+
+      user.password = encryptionPassword(user.password);
+      
       const _data = await prisma.user.create({
         data: user,
       });
