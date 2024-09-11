@@ -2,8 +2,7 @@
 import { fetchAPI } from "@/lib/fetchers/fetchAPI";
 import { User } from "@prisma/client";
 import { useState } from "react";
-const bcrypt = require('bcryptjs');
-
+const bcrypt = require("bcryptjs");
 
 export const RegisterForm = () => {
   const [user] = useState<Partial<User>>({
@@ -12,25 +11,44 @@ export const RegisterForm = () => {
     password: "",
   });
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
+  const [error, setError] = useState<string | null>("");
 
   async function Register() {
-    console.log("user", user);
-   
-    if (user.email && user.password && user.pseudo) {
-
-      //HASH GENERATION
-      var salt = bcrypt.genSaltSync(10);
-      user.password = bcrypt.hashSync(user.password, salt);
-
-      //INSERT USER
-       await fetch("/api/user/create", {
-        method: "POST",
-        
-        body: JSON.stringify(user),
-      });
-
-      //TODO : FEEDBACK USER
+    // Input validation
+    if (user.email || user.password || user.pseudo === null) {
+      setError("Veuillez completer totu les champs.");
+      return;
     }
+
+    try {
+      if (user.email && user.password && user.pseudo) {
+        //HASH GENERATION
+        var salt = bcrypt.genSaltSync(10);
+        user.password = bcrypt.hashSync(user.password, salt);
+
+        //INSERT USER
+        await fetch("/api/user/create", {
+          method: "POST",
+
+          body: JSON.stringify(user),
+        });
+      }
+    } catch (err: unknown) {
+      const _errorMessage = "Une erreur inconnue est survenue";
+
+      if (err instanceof Error) {
+        setError(err.message as string);
+      } else {
+        setError(_errorMessage);
+      }
+    }
+
+  }
+
+  function isPasswordIdentique(){
+
+    
+
   }
 
   // TODO
@@ -41,6 +59,7 @@ export const RegisterForm = () => {
   return (
     <div className="">
       <h1 className="title">Création de compte.</h1>
+      {error !== null ?? <p className="error text-red-600">{error}</p>}
       <form className="flex flex-col">
         <label htmlFor="email">*Adresse email :</label>
         <input

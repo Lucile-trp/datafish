@@ -1,68 +1,58 @@
-import { passwordVerify } from "@/lib/bcypt";
+
 import { fetchAPI } from "@/lib/fetchers/fetchAPI";
 import { User } from "@prisma/client";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 
 export const LoginForm = () => {
-  const [user] = useState<Partial<User>>({
+  const [user, setUser] = useState<Partial<User>>({
     email: "",
     password: "",
   });
+  const router = useRouter();
+  const [error, setError] = useState("");
 
-  async function Login() {
-    try {
-      // Vérifier si l'utilisateur existe via une requête GET à l'API
-      const userExistResponse = await fetch("/api/user/get?email=" + user.email, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "GET"
-      });
-  
-      // Convertir la réponse en JSON
-      const userExist = await userExistResponse.json();
-  
-      // Si l'utilisateur existe
-      if (userExist) {
-        // Vérifier si le mot de passe correspond (via une API POST par exemple)
-        const isMatch = await passwordVerify(user.email as string, user.password as string)
-  
-  
-        // Si le mot de passe est correct
-        if (isMatch) {
-          console.log("Connexion réussie");
-  
-          // TODO: Rediriger vers la page de profil (ex: avec window.location.href)
-          window.location.href = "/profil";
-        } else {
-          console.log("Mot de passe incorrect");
-        }
-      } else {
-        console.log("Utilisateur inconnu");
-      }
-    } catch (error) {
-      console.error("Erreur lors de la connexion", error);
+  const handleSubmit = async () => {
+
+    const res = await signIn("credentials", {
+      redirect: false, // Pas de redirection automatique
+      email: user.email,
+      password: user.password,
+    });
+
+    if (res?.error) {
+      setError("Identifiants incorrects");
+    } else {
+      router.push("/"); // Redirige après une connexion réussie
     }
-  }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
   
 
   return (
-    <form className="flex flex-col">
+    <form className="flex flex-col" method="post">
       <label htmlFor="email">*Adresse email :</label>
       <input
         type="text"
+        name="email"
         id="email"
-        onChange={(e) => (user.email = e.target.value)}
+        onChange={(e) => handleChange(e)}
       ></input>
 
-      <label htmlFor="p1">*Mot de passe :</label>
+      <label htmlFor="password">*Mot de passe :</label>
       <input
         type="password"
-        id="p1"
-        onChange={(e) => (user.password = e.target.value)}
+        id="password"
+        name="password"
+        onChange={(e) => handleChange(e)}
       ></input>
 
-      <div onClick={Login}>Se connecter</div>
+      <div onClick={handleSubmit}>Se connecter</div>
     </form>
   );
 };
