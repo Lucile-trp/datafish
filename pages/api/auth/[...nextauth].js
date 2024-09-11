@@ -4,6 +4,7 @@ import { passwordVerify } from "@/lib/bcypt";
 import prisma from "@/lib/prisma";
 
 export const authOptions = {
+  debug: true,
   // Configure one or more authentication providers
   providers: [
     CredentialsProvider({
@@ -13,7 +14,7 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        console.log(credentials);
+        //TODO GESTION DES ERREURS
         try {
           const user = await prisma.user.findUnique({
             where: {
@@ -27,9 +28,8 @@ export const authOptions = {
 
           // Vérification mot de passe
           const isMatch = await passwordVerify(
-            credentials.email,
             credentials.password,
-            user
+            user.password
           );
 
           if (!isMatch) {
@@ -37,7 +37,7 @@ export const authOptions = {
           }
 
           // Retourne l'utilisateur si tout est correct
-          return { id: user._id, name: user.name, username: user.pseudo };
+          return { id: user.id, email: user.email, username: user.pseudo };
         } catch (error) {
           console.error("Erreur lors de la connexion", error);
         }
@@ -48,14 +48,54 @@ export const authOptions = {
     signIn: "auth/login",
   },
   session: {
-    jwt: true,
+    strategy: "jwt",
+  },
+  jwt: {
+    secret: process.env.JWT_SECRET,
+    encryption: true,
   },
   callbacks: {
+    // gestion du JWT
+    async jwt({ token, user }) {
+      console.log("JWT Callback - token: ", token, " user: ", user);
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+      }
+      return token;
+    },
+    // Callback pour inclure des infos supplémentaires dans la session côté client
+    async session({ session, token }) {
+      console.log("Session Callback - session: ", session, " token: ", token);
+      if (token) {
+        session.id = token.id;
+        session.email = token.email;
+      }
+      return session;
+    },
+    // Callback de connexion
     async signIn({ user, account, profile, email, credentials }) {
-      console.log("youpiii");
+      console.log("Utilisateur connecté :", user);
       return true;
     },
   },
+
+  cookies: {
+    sessionToken: {
+      name:
+        process.env.NODE_ENV === "production"
+          ? "__Secure-next-auth.session-token"
+          : "next-auth.session-token",
+      options: {
+        httpOnly: true,
+        sameSite: "lax",
+        path: "/",
+        secure: process.env.NODE_ENV === "production", // Assurez-vous que le cookie est sécurisé en production
+      },
+    },
+  },
+
+  secret: process.env.NEXTAUTH_SECRET,
 };
 
 export default NextAuth(authOptions);
