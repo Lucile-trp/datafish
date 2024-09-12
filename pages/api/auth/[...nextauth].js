@@ -5,8 +5,9 @@ import prisma from "@/lib/prisma";
 
 export const authOptions = {
   debug: true,
-  // Configure one or more authentication providers
+  // Configuration des providers
   providers: [
+    // EMAIL / MDP
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -15,6 +16,10 @@ export const authOptions = {
       },
       async authorize(credentials) {
         //TODO GESTION DES ERREURS
+        if (credentials.email == null || credentials.password == null) {
+          throw new Error("Champs manquants");
+        }
+
         try {
           const user = await prisma.user.findUnique({
             where: {
@@ -39,7 +44,7 @@ export const authOptions = {
           // Retourne l'utilisateur si tout est correct
           return { id: user.id, email: user.email, username: user.pseudo };
         } catch (error) {
-          console.error("Erreur lors de la connexion", error);
+          return error;
         }
       },
     }),
@@ -57,7 +62,6 @@ export const authOptions = {
   callbacks: {
     // gestion du JWT
     async jwt({ token, user }) {
-      console.log("JWT Callback - token: ", token, " user: ", user);
       if (user) {
         token.id = user.id;
         token.email = user.email;
@@ -66,7 +70,6 @@ export const authOptions = {
     },
     // Callback pour inclure des infos supplémentaires dans la session côté client
     async session({ session, token }) {
-      console.log("Session Callback - session: ", session, " token: ", token);
       if (token) {
         session.id = token.id;
         session.email = token.email;
@@ -75,7 +78,7 @@ export const authOptions = {
     },
     // Callback de connexion
     async signIn({ user, account, profile, email, credentials }) {
-      console.log("Utilisateur connecté :", user);
+      console.log("probleme ?")
       return true;
     },
   },
