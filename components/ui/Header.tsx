@@ -14,7 +14,7 @@ export const Header = () => {
         </div>
         <div className="flex">
           <NavigationBar navigation={navigation}></NavigationBar>
-          <MobileMenuNavigation {...navigation}></MobileMenuNavigation>
+          <MobileMenuNavigation navigation={navigation}></MobileMenuNavigation>
           {/* <Link href="/" className="text-white font-bold ml-8">Se connecter</Link> */}
         </div>
       </div>
