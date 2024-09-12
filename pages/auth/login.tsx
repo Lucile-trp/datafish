@@ -4,12 +4,11 @@ import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
 export default function LogInPage() {
-  const [session, setSession] = useState<Session | null>(null);
+  const [, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    const _sess = getSession().then((res) => setSession(res))
-  },[])
-
+    getSession().then((res) => setSession(res));
+  }, []);
 
   return (
     <>

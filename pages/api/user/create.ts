@@ -16,9 +16,8 @@ export default async function user(req: NextApiRequest, res: NextApiResponse) {
 
   if (method == "POST") {
     try {
-
       user.password = encryptionPassword(user.password);
-      
+
       const _data = await prisma.user.create({
         data: user,
       });

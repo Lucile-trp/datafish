@@ -33,7 +33,6 @@ export const LoginForm = () => {
       }
     } catch (err) {
       handleError("Error: " + err);
-      console.error("error login : ", err);
     }
   };
 
