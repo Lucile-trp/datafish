@@ -3,8 +3,6 @@ import { NavigationBar } from "../layouts/navigation/Navigation";
 import { MobileMenuNavigation } from "../layouts/navigation/Mobile";
 import { navigation } from "@/resources/Navigation";
 
-
-
 export const Header = () => {
   return (
     <header>
@@ -15,9 +13,8 @@ export const Header = () => {
           <h1 className="text-white font-bold text-2xl">Datafish</h1>
         </div>
         <div className="flex">
-          <NavigationBar {...navigation}></NavigationBar>
-          <MobileMenuNavigation {...navigation}></MobileMenuNavigation>
-          {/* <Link href="/" className="text-white font-bold ml-8">Se connecter</Link> */}
+          <NavigationBar navigation={navigation}></NavigationBar>
+          <MobileMenuNavigation navigation={navigation}></MobileMenuNavigation>
         </div>
       </div>
     </header>
