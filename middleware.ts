@@ -33,8 +33,9 @@ export async function middleware(req: NextRequest) {
   }
 
   // VERIFICATION DE ROLES
-  if (!isLoggedIn && role !== "ADMIN" && pathname.startsWith("/admin")) {
+  if (!isLoggedIn && role != "ADMIN" && pathname.startsWith("/admin")) {
     // Redirige l'utilisateur non connecté vers la Home page
+    console.log("un truc");
     return NextResponse.redirect(new URL("/", req.url));
   }
 
