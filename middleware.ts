@@ -9,14 +9,14 @@ export async function middleware(req: NextRequest) {
   // Obtenir le token JWT pour vérifier si l'utilisateur est connecté
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
+  console.log("Middleware log :", token);
   // L'URL actuelle que l'utilisateur essaie d'accéder
   const { pathname } = req.nextUrl;
 
-  const { role } = token as JWT;
+  const role = token ? (token as JWT).role : null;
 
   // Vérifie si l'utilisateur est connecté
   const isLoggedIn = !!token;
-  console.log("Middleware log :", token, pathname, isLoggedIn);
 
   // VERIFICATION DE CONNEXIONS
   // Routes non accessible aux utilisateurs connectés
