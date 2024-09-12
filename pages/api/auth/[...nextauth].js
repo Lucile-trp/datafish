@@ -15,8 +15,10 @@ export const authOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        //TODO GESTION DES ERREURS
-        if (credentials.email == null || credentials.password == null) {
+        const { email, password } = credentials;
+
+        // GESTION DES ERREURS
+        if (email == null || password == null) {
           throw new Error("Champs manquants");
         }
 
@@ -42,9 +44,12 @@ export const authOptions = {
           }
 
           // Retourne l'utilisateur si tout est correct
-          return { id: user.id, email: user.email, username: user.pseudo };
+          return user;
         } catch (error) {
-          return error;
+          console.error("Erreur d'authentification:", error.message);
+          throw new Error(
+            error.message || "Une erreur inattendue est survenue"
+          );
         }
       },
     }),
@@ -78,7 +83,6 @@ export const authOptions = {
     },
     // Callback de connexion
     async signIn({ user, account, profile, email, credentials }) {
-      console.log("probleme ?")
       return true;
     },
   },

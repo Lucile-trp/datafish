@@ -14,22 +14,9 @@ export const LoginForm = () => {
   const { handleError } = useErrorHandler();
 
   const handleSubmit = async () => {
-    // TODO : Englober dans un Try Catch qui permettra de récupérer les erreurs de next auth
-    // const res = await signIn("credentials", {
-    //   redirect: false, // Pas de redirection automatique
-    //   email: user.email,
-    //   password: user.password,
-    // });
-    // console.log("result : ", res);
-
-    // if (res?.error) {
-    //   setError("Identifiants incorrects");
-    // } else {
-    //   router.push("/"); // Redirige après une connexion réussie
-    // }
-
     if (user.email === "" || user.password === "") {
       handleError("Veuillez completer tout les champs");
+      return;
     }
 
     try {
@@ -38,13 +25,15 @@ export const LoginForm = () => {
         email: user.email,
         password: user.password,
       });
-      console.log(result);
+
       if (!result?.ok) {
         handleError("Login failed: " + result?.error);
+      } else {
+        router.push("/"); // Redirige après une connexion réussie
       }
     } catch (err) {
       handleError("Error: " + err);
-      console.log("error login : ", err);
+      console.error("error login : ", err);
     }
   };
 
