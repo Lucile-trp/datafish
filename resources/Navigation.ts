@@ -42,12 +42,5 @@ export const navigation: NavigationType = [
     children: [],
     requiresAuth: false, // Visible uniquement pour les utilisateurs non connectés
     requiresNoAuth: true,
-  },
-  {
-    title: "Déconnexion",
-    href: "/auth/logout",
-    children: [],
-    requiresAuth: true, // Visible uniquement pour les utilisateurs connectés
-    requiresNoAuth: false,
-  },
+  }
 ];

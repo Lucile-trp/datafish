@@ -1,6 +1,6 @@
 import { NavigationType } from "@/types/Navigation";
 import Link from "next/link";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 
 // Le composant récupère directement l'état de la session via `useSession`
 export const NavigationBar = ({
@@ -11,6 +11,13 @@ export const NavigationBar = ({
   // Utilisation de `useSession` pour vérifier si l'utilisateur est connecté
   const { data: session } = useSession();
   const isAuthenticated = !!session; // Si la session existe, l'utilisateur est connecté
+
+  const handleLogout = async () => {
+    await signOut({
+      redirect: true,
+      callbackUrl: "/", // Rediriger vers la page d'accueil après la déconnexion
+    });
+  };
 
   return (
     <nav className="md:flex flex-row gap-7 text-white hidden">
@@ -32,6 +39,11 @@ export const NavigationBar = ({
             </Link>
           );
         })}
+        {isAuthenticated && (
+        <button onClick={handleLogout} className="h-6 hover:border-b hover:border-white">
+          Se déconnecter
+        </button>
+      )}
     </nav>
   );
 };
