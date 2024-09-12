@@ -14,6 +14,7 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   const role = token ? (token as JWT).role : null;
+  console.log("Middleware log : [user role] ", role);
 
   // Vérifie si l'utilisateur est connecté
   const isLoggedIn = !!token;
@@ -32,7 +33,7 @@ export async function middleware(req: NextRequest) {
   }
 
   // VERIFICATION DE ROLES
-  if (!isLoggedIn && role !== "ADMIN" && pathname.startsWith("/admin")) {
+  if (isLoggedIn && role != "ADMIN" && pathname.startsWith("/admin")) {
     // Redirige l'utilisateur non connecté vers la Home page
     return NextResponse.redirect(new URL("/", req.url));
   }
