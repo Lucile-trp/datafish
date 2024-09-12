@@ -1,14 +1,6 @@
 import { LoginForm } from "@/components/auth/login/form";
-import { getServerSession, Session } from "next-auth";
-import { getSession } from "next-auth/react";
-import { useEffect, useState } from "react";
 
 export default function LogInPage() {
-  const [, setSession] = useState<Session | null>(null);
-
-  useEffect(() => {
-    getSession().then((res) => setSession(res));
-  }, []);
 
   return (
     <>

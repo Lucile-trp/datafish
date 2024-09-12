@@ -1,95 +1,113 @@
 /* eslint-disable react/no-unescaped-entities */
-import { fetchAPI } from "@/lib/fetchers/fetchAPI";
+import { useErrorHandler } from "@/hooks/useErrorHandler";
+import { encryptionPassword } from "@/lib/bcypt";
 import { User } from "@prisma/client";
 import { useState } from "react";
 const bcrypt = require("bcryptjs");
 
+// TODO : Vérification de la disponibilité de l'email et du Pseudo
+
 export const RegisterForm = () => {
-  const [user] = useState<Partial<User>>({
+  const [user, setUser] = useState<Partial<User>>({
     email: "",
     pseudo: "",
     password: "",
   });
   const [passwordConfirmation, setPasswordConfirmation] = useState<string>("");
-  const [error, setError] = useState<string | null>("");
+  const { handleError } = useErrorHandler();
 
-  async function Register() {
+  async function Register(e: React.FormEvent) {
+    e.preventDefault(); // Prevent page refresh on form submit
+
     // Input validation
-    if (user.email || user.password || user.pseudo === null) {
-      setError("Veuillez completer totu les champs.");
+    if (!user.email || !user.password || !user.pseudo) {
+      handleError("Veuillez compléter tous les champs.");
       return;
     }
 
+    if (user.password !== passwordConfirmation) {
+      handleError("Les mots de passe ne correspondent pas.");
+      return;
+    }
+
+    // user creation
     try {
       if (user.email && user.password && user.pseudo) {
-        //HASH GENERATION
-        var salt = bcrypt.genSaltSync(10);
-        user.password = bcrypt.hashSync(user.password, salt);
-
-        //INSERT USER
-        await fetch("/api/user/create", {
+        // INSERT USER
+        const response = await fetch("/api/user/create", {
           method: "POST",
-
-          body: JSON.stringify(user),
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...user,
+          }),
         });
+
+        if (!response.ok) {
+          throw new Error("Erreur lors de la création du compte.");
+        }
       }
     } catch (err: unknown) {
       const _errorMessage = "Une erreur inconnue est survenue";
 
       if (err instanceof Error) {
-        setError(err.message as string);
+        handleError(err.message as string);
       } else {
-        setError(_errorMessage);
+        handleError(_errorMessage);
       }
     }
-
   }
 
-  function isPasswordIdentique(){
-
-    
-
-  }
-
-  // TODO
-  // function vérification dispo email & pseudo
-  // Function vérification password & confirmation
-  // function vérification diff password
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+  };
 
   return (
     <div className="">
       <h1 className="title">Création de compte.</h1>
-      {error !== null ?? <p className="error text-red-600">{error}</p>}
-      <form className="flex flex-col">
+      <form className="flex flex-col" onSubmit={Register}>
         <label htmlFor="email">*Adresse email :</label>
         <input
-          type="text"
+          type="email"
           id="email"
-          onChange={(e) => (user.email = e.target.value)}
-        ></input>
+          name="email"
+          value={user.email || ""}
+          onChange={handleChange}
+        />
 
-        <label htmlFor="pseudo">pseudo :</label>
+        <label htmlFor="pseudo">Pseudo :</label>
         <input
           type="text"
           id="pseudo"
-          onChange={(e) => (user.pseudo = e.target.value)}
-        ></input>
+          name="pseudo"
+          value={user.pseudo || ""}
+          onChange={handleChange}
+        />
 
-        <label htmlFor="p1">*Mot de passe :</label>
+        <label htmlFor="password">*Mot de passe :</label>
         <input
           type="password"
-          id="p1"
-          onChange={(e) => (user.password = e.target.value)}
-        ></input>
+          id="password"
+          name="password"
+          value={user.password || ""}
+          onChange={handleChange}
+        />
 
-        <label htmlFor="p2">*Confirmation de votre mot de passe :</label>
+        <label htmlFor="passwordConfirmation">
+          *Confirmation de votre mot de passe :
+        </label>
         <input
           type="password"
-          id="p2"
+          id="passwordConfirmation"
+          value={passwordConfirmation}
           onChange={(e) => setPasswordConfirmation(e.target.value)}
-        ></input>
+        />
 
-        <div onClick={Register}>S'inscrire</div>
+        <button type="submit" className="btn-primary">
+          S'inscrire
+        </button>
       </form>
     </div>
   );
