@@ -1,5 +1,3 @@
-import { User } from "@prisma/client";
-
 const bcrypt = require("bcryptjs");
 
 export function encryptionPassword(password: string) {
@@ -10,11 +8,7 @@ export function encryptionPassword(password: string) {
   return enryptedPassword;
 }
 
-export async function passwordVerify(
-  password: string,
-  password_hash: string,
-) {
-
+export async function passwordVerify(password: string, password_hash: string) {
   const isMatch = await bcrypt.compare(password, password_hash);
 
   return isMatch;

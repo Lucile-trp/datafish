@@ -70,6 +70,7 @@ export const authOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.role = user.role;
       }
       return token;
     },
@@ -78,6 +79,7 @@ export const authOptions = {
       if (token) {
         session.id = token.id;
         session.email = token.email;
+        session.role = token.role;
       }
       return session;
     },

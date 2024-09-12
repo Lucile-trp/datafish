@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { JWT } from "next-auth";
 
 // Fonction middleware
 export async function middleware(req: NextRequest) {
@@ -10,6 +11,8 @@ export async function middleware(req: NextRequest) {
 
   // L'URL actuelle que l'utilisateur essaie d'accéder
   const { pathname } = req.nextUrl;
+
+  const { role } = token as JWT;
 
   // Vérifie si l'utilisateur est connecté
   const isLoggedIn = !!token;
@@ -24,13 +27,13 @@ export async function middleware(req: NextRequest) {
 
   // Routes non accessible aux utilisateurs non connectés
   if (!isLoggedIn && pathname.startsWith("/user")) {
-    // Redirige l'utilisateur non connecté vers la page de connexion
+    // Redirige l'utilisateur non connecté vers la Home page
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // TODO : VERIFICATION DE ROLES
-  if (!isLoggedIn && pathname.startsWith("/admin")) {
-    // Redirige l'utilisateur non connecté vers la page de connexion
+  // VERIFICATION DE ROLES
+  if (!isLoggedIn && role !== "ADMIN" && pathname.startsWith("/admin")) {
+    // Redirige l'utilisateur non connecté vers la Home page
     return NextResponse.redirect(new URL("/", req.url));
   }
 
