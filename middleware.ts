@@ -14,6 +14,7 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   const role = token ? (token as JWT).role : null;
+  console.log("Middleware log : [user role] ", role);
 
   // Vérifie si l'utilisateur est connecté
   const isLoggedIn = !!token;
