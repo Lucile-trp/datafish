@@ -3,30 +3,30 @@ import { Session } from "next-auth";
 import { getSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 
-interface PageProps {
-  session: Session | null;
-}
+// interface PageProps {
+//   session: Session | null;
+// }
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async (
-  context
-) => {
-  const session = await getSession(context);
+// export const getServerSideProps: GetServerSideProps<PageProps> = async (
+//   context
+// ) => {
+//   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/auth/login",
-        permanent: false,
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/auth/login",
+//         permanent: false,
+//       },
+//     };
+//   }
 
-  return {
-    props: {
-      session,
-    },
-  };
-};
+//   return {
+//     props: {
+//       session,
+//     },
+//   };
+// };
 
 export default function IndexAdmin() {
   return (
