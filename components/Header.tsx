@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const Header: React.FC = () => {
   return (
-    <div className="h-[65px] lg:h-[80px] w-full flex items-center justify-between">
+    <div className="h-[65px] lg:h-[80px] px-[80px] w-full flex items-center justify-between bg-gradient-to-b from-black/0 to-black/5 ">
       <div className="flex gap-5 items-center h-full">
         <Image
           src="/logo/logo-white.svg"
@@ -14,7 +14,9 @@ export const Header: React.FC = () => {
         <div className="border-r border-white h-1/2 lg:h-2/3"></div>
         <div>
           <h1 className="text-4xl">Datafish</h1>
-          <p className="test-xl hidden lg:block">Encyclopédie de la faune maritime</p>
+          <p className="test-xl hidden lg:block">
+            Encyclopédie de la faune maritime
+          </p>
         </div>
       </div>
       {/* NAVIGATION */}
@@ -25,7 +27,9 @@ export const Header: React.FC = () => {
               <Link href="#">Datavisualisation</Link>
             </li>
             <li>
-              <Link href="#" className="">Encyclopédie</Link>
+              <Link href="#" className="">
+                Encyclopédie
+              </Link>
             </li>
           </ul>
         </nav>
