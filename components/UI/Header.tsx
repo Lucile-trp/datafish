@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export const Header: React.FC = () => {
   return (
-    <div className="h-[65px] lg:h-[150px] px-[80px] w-full flex items-center justify-between bg-gradient-to-b from-black/0 via-black/0 to-black/5 lg:bg-none ">
-      <div className="flex gap-5 items-center h-full items-center">
+    <div className="absolute h-[65px] md:h-[150px] px-[80px] w-full flex justify-between mt-12">
+      <div className="flex gap-5 h-full">
         <Link href="/">
         <Image
           src="/logo/logo-white.svg"
@@ -24,13 +24,18 @@ export const Header: React.FC = () => {
       {/* NAVIGATION */}
       <div>
         <nav>
-          <ul className="flex gap-3">
+          <ul className="gap-2 h-full text-white/20 flex flex-col items-end">
             <li>
-              <Link href="#">Datavisualisation</Link>
+              <Link href="#" className="text-lg hover:text-white transition duration-300 ease-in-out">Datavisualisation</Link>
             </li>
             <li>
-              <Link href="/encyclopedia" className="">
+              <Link href="/encyclopedia" className=" text-lg hover:text-white transition duration-300 ease-in-out">
                 Encyclopédie
+              </Link>
+            </li>
+            <li>
+              <Link href="#" className="text-lg hover:text-white transition duration-300 ease-in-out">
+                Connexion
               </Link>
             </li>
           </ul>
