@@ -3,15 +3,17 @@ import Link from "next/link";
 
 export const Header: React.FC = () => {
   return (
-    <div className="h-[65px] lg:h-[80px] px-[80px] w-full flex items-center justify-between bg-gradient-to-b from-black/0 via-black/0 to-black/5 ">
+    <div className="h-[65px] lg:h-[150px] px-[80px] w-full flex items-center justify-between bg-gradient-to-b from-black/0 via-black/0 to-black/5 lg:bg-none ">
       <div className="flex gap-5 items-center h-full items-center">
+        <Link href="/">
         <Image
           src="/logo/logo-white.svg"
           alt="logo of datafish"
           width={60}
           height={10}
         ></Image>
-        <div className="border-r border-white h-1/2 lg:h-2/3"></div>
+        </Link>
+        <div className="border-r border-white h-10 lg:h-16"></div>
         <div>
           <h1 className="text-4xl">Datafish</h1>
           <p className="test-xl hidden lg:block">

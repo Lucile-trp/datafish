@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
         className="fixed bottom-6 flex justify-center w-full "
         onClick={() => setOpen(!open)}
       >
-        <div className="h-10 w-10 rounded-full flex justify-center items-center p-2 transition duration-300 ease-in-out hover:bg-white/30 border border-white hover:border-white/30">
+        <div className="h-10 w-10 rounded-full flex justify-center items-center p-2 transition duration-300 ease-in-out border hover:bg-gradient-to-br from-white/20 via-white/0 to-white/10 border-white hover:border-white/30">
           <ArrowUpIcon />
         </div>
       </div>

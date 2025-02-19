@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <div className="grid items-center justify-items-center min-h-[calc(100vh-100px)]">
+    <div className="grid items-center justify-items-center min-h-[calc(100vh-80px)] lg:min-h-[calc(100vh-150px)]">
       <main className="flex flex-col gap-8 items-center">
         <div className="grid grid-cols-2">
           <div className="">
