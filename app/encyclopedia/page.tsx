@@ -1,7 +1,9 @@
 export default function Encyclopedia() {
     return (
-        <main className="grid min-h-[calc(100vh-80px)] lg:min-h-[calc(100vh-150px)]">
+        <div className="grid min-h-screen">
+        <main className="mt-32 mx-32">
             <h1>Encyclopédie</h1>
         </main>
+        </div>
     )
 }
