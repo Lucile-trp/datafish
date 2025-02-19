@@ -3,8 +3,8 @@ import Link from "next/link";
 
 export const Header: React.FC = () => {
   return (
-    <div className="h-[65px] lg:h-[80px] px-[80px] w-full flex items-center justify-between bg-gradient-to-b from-black/0 to-black/5 ">
-      <div className="flex gap-5 items-center h-full">
+    <div className="h-[65px] lg:h-[80px] px-[80px] w-full flex items-center justify-between bg-gradient-to-b from-black/0 via-black/0 to-black/5 ">
+      <div className="flex gap-5 items-center h-full items-center">
         <Image
           src="/logo/logo-white.svg"
           alt="logo of datafish"

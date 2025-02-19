@@ -37,6 +37,8 @@
     color: var(--foreground);
     background: radial-gradient(#032549, #001220);
     font-family: Fauna, Arial, sans-serif;
+    position: relative;
+    z-index: 10;
   }
 
 }
