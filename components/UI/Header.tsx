@@ -29,7 +29,7 @@ export const Header: React.FC = () => {
               <Link href="#">Datavisualisation</Link>
             </li>
             <li>
-              <Link href="#" className="">
+              <Link href="/encyclopedia" className="">
                 Encyclopédie
               </Link>
             </li>
