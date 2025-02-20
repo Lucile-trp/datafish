@@ -20,7 +20,7 @@ export default function Home() {
         <div className="bg-black/50 w-full h-full">
           <p></p>
         </div>
-        <div className="absolute bottom-10  right-10 border border-white rounded-3xl p-4 ">
+        <div className="absolute bottom-10 right-24 border border-white rounded-3xl p-4 ">
           <p>
             <span className="italic">1000</span> poissons renseignés
           </p>
