@@ -14,8 +14,31 @@
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  @font-face {
+    font-family: Fauna;
+    font-weight: 400;
+    src: url("/font/faune/Faune-Text_Regular.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: Fauna;
+    font-weight: 400;
+    font-style: italic;
+    src: url("/font/faune/Faune-Text_Italic.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: Fauna;
+    font-weight: 700;
+    font-style: bold;
+    src: url("/font/faune/Faune-Text_Bold.woff2") format("woff2");
+  }
+
+  body {
+    color: white;
+    background: radial-gradient(#032549, #001220);
+    font-family: Fauna, Arial, sans-serif;
+    position: relative;
+    z-index: 10;
+  }
+
 }
