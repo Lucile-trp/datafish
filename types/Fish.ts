@@ -47,10 +47,18 @@ export type Fish = {
   //LIFESTYLE
   venoumous: boolean;
   gestation: number;
-  sociability: string;
   diet: string;
   lifespan: number;
 
+  //
+  behavior: {
+    activity_period: string;
+    sociability: string;
+    temperament: string;
+    schooling: string; //Vit en banc ?
+  };
+
   // AQUARIOPHILY
   difficulty: string;
+  compatibility: string[];
 };
