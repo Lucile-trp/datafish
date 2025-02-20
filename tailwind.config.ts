@@ -8,6 +8,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        faune: ['faune']
+
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
