@@ -1,6 +1,9 @@
+import BubblesBackground from "@/components/UI/Background_bubbles";
+
 export default function Home() {
   return (
     <div className="grid items-center justify-items-center min-h-screen">
+      <BubblesBackground />
       <main className="flex flex-col gap-8 items-center">
         <div className="grid grid-cols-2">
           <div className="">
