@@ -52,7 +52,6 @@ export default function BubblesBackground() {
 
     const animate = (timestamp: number) => {
       if (!timeRef.current) timeRef.current = timestamp
-      const deltaTime = timestamp - timeRef.current
       timeRef.current = timestamp
 
       ctx.clearRect(0, 0, canvas.width, canvas.height)
