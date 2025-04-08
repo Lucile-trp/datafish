@@ -3,6 +3,7 @@ export type Fish = {
     id: string;
     created_at: Date;
     updated_at?: Date | null;
+    version: number
   };
 
   // MAIN INFORMATIONS
@@ -50,7 +51,7 @@ export type Fish = {
   diet: string;
   lifespan: number;
 
-  //
+  // COMPORTEMENT
   behavior: {
     activity_period: string;
     sociability: string;
