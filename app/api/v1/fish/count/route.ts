@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Fish from "@/model/Fish";
+import Fish from "@/models/Fish.model";
 import connectDB from "@/lib/database/useDatabase";
 
 export async function GET() {

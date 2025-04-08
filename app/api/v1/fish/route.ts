@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
-import Fish, { IFish } from "@/model/Fish";
+import Fish, { IFish } from "@/models/Fish.model";
 import connectDB from "@/lib/database/useDatabase";
 
 // CREATE
