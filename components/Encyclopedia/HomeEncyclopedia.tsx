@@ -14,7 +14,12 @@ export const HomeEncyclopedia: React.FC = () => {
   }, []);
   return (
     <>
-      <h1 className="text-2xl pb-2" dangerouslySetInnerHTML={{ __html: escapeHtmlEntities("L'Encyclopédie") }}></h1>
+      <h1
+        className="text-2xl pb-2"
+        dangerouslySetInnerHTML={{
+          __html: escapeHtmlEntities("L'Encyclopédie"),
+        }}
+      ></h1>
       <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
         {fish.map((f) => {
           return <Card key={f.metadata.id} {...f} />;
