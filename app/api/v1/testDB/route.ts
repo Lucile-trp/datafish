@@ -1,11 +1,9 @@
 import connectDB from "@/lib/database/useDatabase";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
 export async function GET() {
   try {
-    const db = await connectDB();
-    console.log(db)
+    await connectDB();
     return NextResponse.json(
       {
         success: true,
