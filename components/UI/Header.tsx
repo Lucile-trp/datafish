@@ -43,7 +43,7 @@ export const Header: React.FC = () => {
             </li>
             <li>
               <Link
-                href="#"
+                href="/auth/login"
                 className="text-lg hover:text-white transition duration-300 ease-in-out"
               >
                 Connexion
