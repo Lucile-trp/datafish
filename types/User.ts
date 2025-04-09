@@ -1,9 +1,9 @@
-type Role = ["USER", "EDITOR" ,"ADMINISTRATOR"]
+import { IUser } from "@/models/User.model"
 
-type User = {
+type Role = ["USER", "EDITOR" ,"ADMIN"]
+
+type PublicUser = Pick<IUser, 'id' | 'name' | 'email'> &{
     id: string,
-    email: string,
-    password: string,
     created_at: Date,
     updated_at: Date,
     role: Role,
