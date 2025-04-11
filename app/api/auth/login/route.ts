@@ -23,7 +23,6 @@ export async function POST(req: Request) {
       { status: 404 }
     );
   }
-
   const valid = await compare(password, user.password);
 
   if (!valid) {

@@ -1,7 +1,20 @@
+"use client";
+
+import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect } from "react";
 
 export const Header: React.FC = () => {
+  const { data: session, status } = useSession();
+
+  useEffect(() => {
+    console.log(session);
+  }, [session]);
+
+  const handleLogout = () => {
+    signOut({ callbackUrl: "/" });
+  };
   return (
     <div className="absolute w-full flex justify-between mt-12 px-[120px]">
       <div className="flex gap-5 h-full items-center">
@@ -42,13 +55,24 @@ export const Header: React.FC = () => {
               </Link>
             </li>
             <li>
-              <Link
-                href="/auth/login"
+              {status !== "authenticated" && (
+                <Link
+                  href="/auth/login"
+                  className="text-lg hover:text-white transition duration-300 ease-in-out"
+                >
+                  Connexion
+                </Link>
+              )}
+            </li>
+
+            {status === "authenticated" && (
+              <button
+                onClick={handleLogout}
                 className="text-lg hover:text-white transition duration-300 ease-in-out"
               >
-                Connexion
-              </Link>
-            </li>
+                Deconnexion
+              </button>
+            )}
           </ul>
         </nav>
       </div>

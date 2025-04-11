@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { escapeHtmlEntities } from "@/lib/helpers/escapeHtmlEntities";
 
 export const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
+  const [pseudo, setPseudo] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
@@ -16,14 +17,14 @@ export const AuthForm = () => {
     e.preventDefault();
     setErrorMsg("");
 
-    if (!email || !password || (!isLogin && !name)) {
+    if (!email || !password || (!isLogin && !pseudo)) {
       setErrorMsg("Veuillez remplir tous les champs.");
       return;
     }
 
     if (isLogin) {
       const res = await signIn("credentials", {
-        redirect: false,
+        callbackUrl: "http://localhost:3000/",
         email,
         password,
       });
@@ -35,10 +36,10 @@ export const AuthForm = () => {
       }
     } else {
       try {
-        const res = await fetch("/api/v1/users", {
+        const res = await fetch("/api/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ name, email, password }),
+          body: JSON.stringify({ pseudo, email, password }),
         });
 
         const data = await res.json();
@@ -47,14 +48,17 @@ export const AuthForm = () => {
 
         // Auto-login après inscription
         await signIn("credentials", {
-          redirect: false,
+          callbackUrl: "http://localhost:3000/",
           email,
           password,
         });
 
         router.refresh();
-      } catch (err: any) {
-        setErrorMsg(err.message || "Erreur lors de l'inscription.");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          setErrorMsg(err.message || "Erreur lors de l'inscription.");
+        }
+        setErrorMsg("Une erreur inconnue s'est produite");
       }
     }
   };
@@ -70,8 +74,8 @@ export const AuthForm = () => {
           <input
             type="text"
             placeholder="Pseudo"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={pseudo}
+            onChange={(e) => setPseudo(e.target.value)}
             className="w-full px-4 py-2 rounded-xl bg-white/10 text-white placeholder-white/60 border border-white/30 focus:outline-none focus:ring-2 focus:ring-white/50"
           />
         )}
@@ -110,7 +114,7 @@ export const AuthForm = () => {
               onClick={() => setIsLogin(false)}
               className="text-white underline hover:text-white/90"
             >
-              S'inscrire
+              {escapeHtmlEntities("S'inscrire")}
             </button>
           </>
         ) : (

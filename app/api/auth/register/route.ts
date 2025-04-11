@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import { hash } from "bcrypt";
 
 export async function POST(req: Request) {
   const { pseudo, email, password } = await req.json();
@@ -12,12 +11,11 @@ export async function POST(req: Request) {
   }
 
   try {
-    const hashedPassword = await hash(password, 10);
     const userPayload = {
       id: crypto.randomUUID(),
       name: pseudo,
       email,
-      password: hashedPassword,
+      password: password,
       roles: ["USER"],
     };
 
