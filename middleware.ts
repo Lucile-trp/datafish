@@ -4,6 +4,11 @@ import { getJwtToken, getRoles, canAccess } from './lib/auth/jwt';
 
 export function middleware(request: NextRequest) {
     const token = getJwtToken(request)
+
+    if(!token){
+        return new NextResponse('Missing Authorization header', { status: 400 })
+    }
+
     const roles = getRoles(token as string)
     const access = canAccess(request.nextUrl.pathname, roles, request.method)
 
@@ -15,5 +20,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-    matcher: '/api/v1/:path*',
+    matcher: '/api/v1/fish/:path*',
 }
