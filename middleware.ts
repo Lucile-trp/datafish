@@ -1,23 +1,19 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
+import { getJwtToken, getRoles, canAccess } from './lib/auth/jwt';
 
 export function middleware(request: NextRequest) {
-    const origin = request.nextUrl.origin
-    const userAgent = request.headers.get('user-agent')
-    const vercelUrlPattern = new RegExp("^https://datafish-[\\w-]+-luciletrps-projects\\.vercel\\.app/?$");
+    const token = getJwtToken(request)
+    const roles = getRoles(token as string)
+    const access = canAccess(request.nextUrl.pathname, roles, request.method)
 
-
-    if(origin === "http://localhost:3000" && userAgent && userAgent.startsWith("PostmanRuntime")){
+    if (access) {
         return NextResponse.next()
+    }else {
+        return new NextResponse('Forbidden', { status: 403 });
     }
-
-    if(origin === "https://datafish.vercel.app/" || vercelUrlPattern.test(origin)) {
-        return NextResponse.next()
-    }
-
-   return new NextResponse('Forbidden', { status: 403 });
 }
 
 export const config = {
-    matcher: '/api/:path*',
+    matcher: '/api/v1/:path*',
 }
