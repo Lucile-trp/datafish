@@ -11,7 +11,7 @@ export const Card: React.FC<Fish> = (fish: Fish) => {
         {fish.scientific_name}
       </p>
       <Link
-        href={`/poisson/${fish.metadata.id}`}
+        href={`/encyclopedia/fish/${fish.metadata.id}`}
         className="text-sm text-cyan-300 hover:underline"
       >
         Voir plus...
