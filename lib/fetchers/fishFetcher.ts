@@ -3,7 +3,7 @@ import { IFish } from "@/models/Fish.model";
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const fetchFish = async () => {
-  const response = await fetch("/api/v1/fish");
+  const response = await fetch(`${baseUrl}/api/v1/fish`);
   if (!response.ok) {
     throw new Error("Erreur lors de la récupération des poissons");
   }
@@ -11,7 +11,7 @@ export const fetchFish = async () => {
 };
 
 export const countFishes = async () => {
-  const response = await fetch("/api/v1/fish/count");
+  const response = await fetch(`${baseUrl}/api/v1/fish/count`);
   if (!response.ok) {
     throw new Error("Erreur lors du comptage des poissons");
   }
