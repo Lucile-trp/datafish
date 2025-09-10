@@ -10,11 +10,13 @@ import type { NextRequest } from "next/server";
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: { id: string }}
 ) {
-  const id = (await params).id;
+  const {id} = await params;
+
   await connectDB();
-  const fish = await Fish.findById(id);
+
+  const fish = await Fish.findOne({ "metadata.id": id });
   if (!fish)
     return NextResponse.json(
       { success: false, message: "poisson introuvable." },

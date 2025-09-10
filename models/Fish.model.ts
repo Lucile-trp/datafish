@@ -131,4 +131,4 @@ const FishSchema: Schema = new Schema({
   compatibility: [{ type: String }],
 });
 
-export default mongoose.model<IFish>('Fish', FishSchema);
+export default mongoose.models.Fish || mongoose.model<IFish>("Fish", FishSchema);
