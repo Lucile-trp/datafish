@@ -1,10 +1,12 @@
 import { getOneFish } from "@/lib/fetchers/fishFetcher";
 import { notFound } from "next/navigation";
 
-export default async function FishSheet(props: {
-  params: { id: string } | Promise<{ id: string }>;
+export default async function FishSheet({
+  params,
+}: {
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = await props.params;
+  const { id } = await params;
   const fish = await getOneFish(id);
   if (!fish) {
     notFound();

@@ -8,7 +8,7 @@ export default function NotFound() {
         <BubblesBackground></BubblesBackground>
 
       {/* Contenu principal */}
-      <div className="container mx-auto px-4 py-20 flex flex-col items-start justify-center flex-grow relative">
+      <div className="container mx-12 px-4 py-20 flex flex-col items-start justify-center flex-grow relative">
         <div className="max-w-2xl">
           <h1 className="text-6xl font-bold mb-6 text-white">404</h1>
           <p className="text-2xl font-medium mb-8 text-blue-100">
