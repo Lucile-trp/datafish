@@ -12,7 +12,6 @@ export async function GET() {
       total,
     });
   } catch (error) {
-    console.error("Erreur de comptage :", error);
     return NextResponse.json(
       {
         success: false,
