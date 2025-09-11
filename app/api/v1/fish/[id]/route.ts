@@ -10,17 +10,29 @@ import type { NextRequest } from "next/server";
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: Promise<{ id: string }>}
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const {id} = await params;
+  try {
+    const { id } = await params;
 
-  await connectDB();
+    await connectDB();
 
-  const fish = await Fish.findOne({ "metadata.id": id });
-  if (!fish)
+    const fish = await Fish.findOne({ "metadata.id": id });
+    // If no result return 404
+    if (!fish)
+      return NextResponse.json(
+        { success: false, message: "Poisson introuvable." },
+        { status: 404 }
+      );
+
+    // If result return fish
+    return NextResponse.json({ success: true, fish });
+    
+  } catch (error) {
+    // If server error return 500
     return NextResponse.json(
-      { success: false, message: "poisson introuvable." },
-      { status: 404 }
+      { success: false, message: "Erreur serveur." },
+      { status: 500 }
     );
-  return NextResponse.json({ success: true, fish });
+  }
 }
