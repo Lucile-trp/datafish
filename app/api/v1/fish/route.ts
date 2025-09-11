@@ -2,11 +2,25 @@ import { NextResponse } from "next/server";
 import mongoose from "mongoose";
 import Fish, { IFish } from "@/models/Fish.model";
 import connectDB from "@/lib/database/useDatabase";
+import { getMissingRequiredFishFields } from "@/lib/helpers/checkFishInput";
+import { checkUniqueFish } from "@/lib/helpers/checkUniqueFish";
 
 // CREATE
 export async function POST(request: Request) {
   try {
     const data: Omit<IFish, "metadata"> = await request.json();
+
+    // Vérification des champs obligatoires
+    const verifyInputs = getMissingRequiredFishFields(data);
+    if (verifyInputs.length > 0) {
+      throw new Error(`Champs obligatoires manquants: ${verifyInputs.join(", ")}`);
+    }
+
+    // Verifie si le poisson existe déjà
+    const checkUnique = checkUniqueFish(data.commun_name, data.scientific_name);
+    if (await checkUnique) {
+      throw new Error("Un poisson avec ce nom commun ou scientifique existe déjà.");
+    }
 
     await connectDB();
 
