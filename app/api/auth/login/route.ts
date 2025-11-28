@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import connectDB from "@/lib/database/useDatabase";
 import User from "@/models/User.model";
 import { compare } from "bcrypt";
+import jwt from "jsonwebtoken"
 
 export async function POST(req: Request) {
   await connectDB();
@@ -32,6 +33,13 @@ export async function POST(req: Request) {
     );
   }
 
+  const jwtPayload = {
+    userId: user.id,
+    roles: user.roles
+  }
+
+  const token = jwt.sign(jwtPayload, process.env.JWT_SECRET as string)
+
   return NextResponse.json({
     success: true,
     user: {
@@ -40,5 +48,6 @@ export async function POST(req: Request) {
       name: user.name,
       roles: user.roles,
     },
+    token
   });
 }
